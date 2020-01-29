@@ -1,5 +1,5 @@
-import compact from 'lodash/compact';
-import flatten from 'lodash/flatten';
+import compact from 'lodash.compact';
+import flatten from 'lodash.flatten';
 import tss from 'typescript/lib/tsserverlibrary';
 import { hasPropertyKey, isPrimitiveType } from './ast-utils';
 import {
