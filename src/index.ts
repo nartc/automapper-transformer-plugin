@@ -21,3 +21,10 @@ export default function tsAutomapperPlugin(
     },
   };
 }
+
+export const before = (
+  options?: TsAutoMapperPluginOptions,
+  program?: tss.Program
+) => {
+  return tsAutomapperPlugin(program as tss.Program, options).before;
+};
