@@ -5,10 +5,10 @@ cache:
 notifications:
   email: false
 node_js:
+  - '10'
   - '12'
 script:
   - npm run test
-
 jobs:
   include:
     - stage: Production
