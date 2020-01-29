@@ -70,11 +70,11 @@ class User {
 }
 ```
 
-This allows `@nartc/automapper` to look at these models and run the `static function` to hold the metadata for each model, exactly like what `@AutoMap()` would do for you. In fact, internally, `@nartc/automapper` calls the static function and iterates over the result then call `AutoMap()` directly.
+This allows `@nartc/automapper` to look at these models and run the `static function` to hold the metadata for each model, exactly like what `@AutoMap()` would do for you. In fact, internally, `@nartc/automapper` calls the static function and iterates over the result then calls `AutoMap()` directly.
 
 ### Limitations
 
-**Transformers** bring great values to developers but they are an experimental feature in **TypeScript**. Hence, to use it, you'd need to modify your build steps directly and each build tool has different setup.
+**Transformers** bring great value to developers but they are an experimental feature in **TypeScript**. Hence, to use it, you'd need to modify your build steps directly and each build tool has different setup.
 
 `@nartc/automapper-transformer-plugin` will only add the minimum amount of code relating to the `@AutoMap()` decorator. If you want to have extra options (options from `class-transformer` library), you'd want to still decorate the fields manually.
 
@@ -100,7 +100,7 @@ interface TsAutoMapperPluginOptions {
 
 #### Webpack
 
-I hope you are using `ts-loader` or some form of `ts-loader forks`. Configure your `webpack.config.js` as follow to turn on the plugin
+I hope you are using `ts-loader` or some form of `ts-loader forks`. Configure your `webpack.config.js` as follows to turn on the plugin
 
 ```javascript
 ...
