@@ -1,6 +1,12 @@
 # AutoMapper Transformer Plugin
 
-This plugin is to support [@nartc/automapper](https://github.com/nartc/automapper) in order to enhance DX by reducing boilerplate code.
+This plugin is to support [@nartc/automapper](https://github.com/nartc/mapper) in order to enhance DX by reducing boilerplate code.
+
+![travis](https://badgen.net/travis/nartc/automapper-transformer-plugin)
+![bundlephobia](https://badgen.net/bundlephobia/minzip/@nartc/automapper-transformer-plugin)
+![downloads](https://badgen.net/npm/dt/@nartc/automapper-transformer-plugin)
+![npm](https://badgen.net/npm/v/@nartc/automaper-transformer-plugin)
+![license](https://badgen.net/github/license/nartc/automapper-transformer-plugin)
 
 ### How it works
 
