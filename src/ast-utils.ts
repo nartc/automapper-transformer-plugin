@@ -58,3 +58,30 @@ function getNameFromExpression(
   }
   return expression;
 }
+
+export function getText(
+  type: tss.Type,
+  typeChecker: tss.TypeChecker,
+  enclosingNode?: tss.Node,
+  typeFormatFlags?: tss.TypeFormatFlags
+) {
+  if (!typeFormatFlags) {
+    typeFormatFlags = getDefaultTypeFormatFlags(enclosingNode);
+  }
+  const compilerNode = !enclosingNode ? undefined : enclosingNode;
+  return typeChecker.typeToString(type, compilerNode, typeFormatFlags);
+}
+
+export function getDefaultTypeFormatFlags(enclosingNode?: tss.Node) {
+  let formatFlags =
+    tss.TypeFormatFlags.UseTypeOfFunction |
+    tss.TypeFormatFlags.NoTruncation |
+    tss.TypeFormatFlags.UseFullyQualifiedType |
+    tss.TypeFormatFlags.WriteTypeArgumentsOfSignature;
+  if (
+    enclosingNode &&
+    enclosingNode.kind === tss.SyntaxKind.TypeAliasDeclaration
+  )
+    formatFlags |= tss.TypeFormatFlags.InTypeAlias;
+  return formatFlags;
+}

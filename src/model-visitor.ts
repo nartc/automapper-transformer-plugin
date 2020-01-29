@@ -8,7 +8,11 @@ import {
   AUTOMAPPER_NAMESPACE,
   AUTOMAPPER_PACKAGE,
 } from './constants';
-import { getDecoratorOrUndefinedByNames } from './plugin-utils';
+import {
+  getDecoratorOrUndefinedByNames,
+  getTypeReferenceAsString,
+  replaceImportPath,
+} from './plugin-utils';
 
 export class ModelVisitor {
   private readonly metadataMap = new Map<string, any>();
@@ -143,7 +147,8 @@ export class ModelVisitor {
       ModelVisitor.createPropertyAssignment(
         node,
         typeChecker,
-        existingProperties
+        existingProperties,
+        sourceFile.fileName
       ),
     ];
     const objectLiteral = tss.createObjectLiteral(compact(flatten(properties)));
@@ -153,7 +158,8 @@ export class ModelVisitor {
   private static createPropertyAssignment(
     node: tss.PropertyDeclaration | tss.GetAccessorDeclaration,
     typeChecker: tss.TypeChecker,
-    existingProperties: tss.NodeArray<tss.PropertyAssignment>
+    existingProperties: tss.NodeArray<tss.PropertyAssignment>,
+    hostFileName: string
   ): tss.PropertyAssignment | undefined {
     const key = node.name?.getText();
     if (!key || hasPropertyKey(key, existingProperties)) {
@@ -172,23 +178,17 @@ export class ModelVisitor {
     if (!type.isClass() && node.type && tss.isClassOrTypeElement(node.type)) {
       return undefined;
     }
-    let typeReference = typeChecker.typeToString(
-      type,
-      node,
-      tss.TypeFormatFlags.UseTypeOfFunction |
-        tss.TypeFormatFlags.NoTruncation |
-        tss.TypeFormatFlags.UseFullyQualifiedType |
-        tss.TypeFormatFlags.WriteTypeArgumentsOfSignature
-    );
+    let typeReference = getTypeReferenceAsString(type, typeChecker);
     typeReference =
       typeReference === 'any' ? node.type?.getText() || '' : typeReference;
     if (!typeReference) {
       return undefined;
     }
 
+    typeReference = replaceImportPath(typeReference, hostFileName);
     return tss.createPropertyAssignment(
       key,
-      tss.createIdentifier(typeReference)
+      tss.createIdentifier(typeReference as string)
     );
   }
 

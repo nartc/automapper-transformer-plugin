@@ -23,7 +23,8 @@
     "test": "CI=true tsdx test --no-cache",
     "lint": "tsdx lint src && lint-staged",
     "commit": "git-cz",
-    "semantic-release": "semantic-release"
+    "semantic-release": "semantic-release",
+    "run:example": "cd examples && ttsc"
   },
   "peerDependencies": {},
   "husky": {
