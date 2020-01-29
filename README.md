@@ -5,7 +5,7 @@ This plugin is to support [@nartc/automapper](https://github.com/nartc/mapper) i
 ![travis](https://badgen.net/travis/nartc/automapper-transformer-plugin)
 ![bundlephobia](https://badgen.net/bundlephobia/minzip/@nartc/automapper-transformer-plugin)
 ![downloads](https://badgen.net/npm/dt/@nartc/automapper-transformer-plugin)
-![npm](https://badgen.net/npm/v/@nartc/automaper-transformer-plugin)
+![npm](https://badgen.net/npm/v/@nartc/automapper-transformer-plugin)
 ![license](https://badgen.net/github/license/nartc/automapper-transformer-plugin)
 
 ### How it works
