@@ -1,5 +1,7 @@
 # AutoMapper Transformer Plugin
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/nartc/automapper-transformer-plugin.svg)](https://greenkeeper.io/)
+
 This plugin is to support [@nartc/automapper](https://github.com/nartc/mapper) in order to enhance DX by reducing boilerplate code.
 
 ![travis](https://badgen.net/travis/nartc/automapper-transformer-plugin)
