@@ -17,7 +17,10 @@ export function isPrimitiveType(type: tss.Type): boolean {
   return (
     type.flags === tss.TypeFlags.String ||
     type.flags === tss.TypeFlags.Number ||
-    type.flags === tss.TypeFlags.Boolean
+    type.flags === tss.TypeFlags.Boolean ||
+    type.symbol.escapedName === 'Date' ||
+    (type.isUnionOrIntersection() &&
+      type.types[0].flags === tss.TypeFlags.BooleanLiteral)
   );
 }
 
