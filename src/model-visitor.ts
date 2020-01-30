@@ -2,12 +2,7 @@ import compact from 'lodash.compact';
 import flatten from 'lodash.flatten';
 import tss from 'typescript/lib/tsserverlibrary';
 import { hasPropertyKey, isPrimitiveType } from './ast-utils';
-import {
-  AUTOMAPPER_DECORATOR,
-  AUTOMAPPER_METADATA_FACTORY,
-  AUTOMAPPER_NAMESPACE,
-  AUTOMAPPER_PACKAGE,
-} from './constants';
+import { AUTOMAPPER_DECORATOR, AUTOMAPPER_METADATA_FACTORY } from './constants';
 import {
   getDecoratorOrUndefinedByNames,
   getTypeReferenceAsString,
@@ -23,8 +18,6 @@ export class ModelVisitor {
     program: tss.Program
   ) {
     const typeChecker = program.getTypeChecker();
-
-    sourceFile = ModelVisitor.updateImports(sourceFile);
 
     function visitor(
       modelVisitor: ModelVisitor,
@@ -190,17 +183,5 @@ export class ModelVisitor {
       key,
       tss.createIdentifier(typeReference as string)
     );
-  }
-
-  private static updateImports(sf: tss.SourceFile): tss.SourceFile {
-    return tss.updateSourceFileNode(sf, [
-      tss.createImportEqualsDeclaration(
-        undefined,
-        undefined,
-        AUTOMAPPER_NAMESPACE,
-        tss.createExternalModuleReference(tss.createLiteral(AUTOMAPPER_PACKAGE))
-      ),
-      ...sf.statements,
-    ]);
   }
 }

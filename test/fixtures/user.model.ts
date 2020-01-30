@@ -13,7 +13,6 @@ export class User {
 
 export const userModelTranspiledText = `"use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const __nartc__automapper = require("@nartc/automapper");
 class Profile {
     static __NARTC_AUTOMAPPER_METADATA_FACTORY() {
         return { bio: null, age: null };
