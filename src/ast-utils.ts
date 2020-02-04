@@ -18,9 +18,19 @@ export function isPrimitiveType(type: tss.Type): boolean {
     type.flags === tss.TypeFlags.String ||
     type.flags === tss.TypeFlags.Number ||
     type.flags === tss.TypeFlags.Boolean ||
-    type.symbol.escapedName === 'Date' ||
+    (type.symbol && type.symbol.escapedName === 'Date') ||
     (type.isUnionOrIntersection() &&
       type.types[0].flags === tss.TypeFlags.BooleanLiteral)
+  );
+}
+
+export function isArrayType(type: tss.Type): boolean {
+  const symbol = type.getSymbol();
+  if (!symbol) {
+    return false;
+  }
+  return (
+    symbol.getName() === 'Array' && (type as any).typeArguments.length === 1
   );
 }
 

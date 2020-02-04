@@ -1,7 +1,7 @@
 import compact from 'lodash.compact';
 import flatten from 'lodash.flatten';
 import tss from 'typescript/lib/tsserverlibrary';
-import { hasPropertyKey, isPrimitiveType } from './ast-utils';
+import { hasPropertyKey, isArrayType, isPrimitiveType } from './ast-utils';
 import { AUTOMAPPER_DECORATOR, AUTOMAPPER_METADATA_FACTORY } from './constants';
 import {
   getDecoratorOrUndefinedByNames,
@@ -174,6 +174,12 @@ export class ModelVisitor {
     let typeReference = getTypeReferenceAsString(type, typeChecker);
     typeReference =
       typeReference === 'any' ? node.type?.getText() || '' : typeReference;
+
+    if (isArrayType(type)) {
+      const arrayType = (type as any).typeArguments[0];
+      typeReference = getTypeReferenceAsString(arrayType, typeChecker);
+    }
+
     if (!typeReference) {
       return undefined;
     }
