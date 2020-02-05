@@ -1,7 +1,12 @@
 import compact from 'lodash.compact';
 import flatten from 'lodash.flatten';
 import tss from 'typescript/lib/tsserverlibrary';
-import { hasPropertyKey, isArrayType, isPrimitiveType } from './ast-utils';
+import {
+  hasPropertyKey,
+  isArrayType,
+  isPrimitiveType,
+  isTypeLiteral,
+} from './ast-utils';
 import { AUTOMAPPER_DECORATOR, AUTOMAPPER_METADATA_FACTORY } from './constants';
 import {
   getDecoratorOrUndefinedByNames,
@@ -164,7 +169,7 @@ export class ModelVisitor {
       return undefined;
     }
 
-    if (isPrimitiveType(type)) {
+    if (isPrimitiveType(type) || isTypeLiteral(type)) {
       return tss.createPropertyAssignment(key, tss.createNull());
     }
 

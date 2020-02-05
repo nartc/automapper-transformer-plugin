@@ -24,6 +24,14 @@ export function isPrimitiveType(type: tss.Type): boolean {
   );
 }
 
+export function isTypeLiteral(type: tss.Type): boolean {
+  const symbol = type.getSymbol();
+  if (!symbol) {
+    return false;
+  }
+  return symbol.getFlags() === tss.SymbolFlags.TypeLiteral;
+}
+
 export function isArrayType(type: tss.Type): boolean {
   const symbol = type.getSymbol();
   if (!symbol) {
