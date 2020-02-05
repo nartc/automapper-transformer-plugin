@@ -175,29 +175,22 @@ export class ModelVisitor {
       type = type.getNonNullableType();
     }
 
-    if (
-      isPrimitiveType(type) ||
-      isTypeLiteral(type) ||
-      isAnyType(type, typeChecker, node)
-    ) {
+    if (this.shouldCreateNullNode(type, typeChecker, node)) {
       return tss.createPropertyAssignment(key, tss.createNull());
-    }
-
-    let typeReference = getTypeReferenceAsString(type, typeChecker);
-    if (isArrayType(type)) {
-      const arrayType = (type as any).typeArguments[0];
-      if (
-        isPrimitiveType(arrayType) ||
-        isTypeLiteral(arrayType) ||
-        isAnyType(arrayType, typeChecker, node)
-      ) {
-        return tss.createPropertyAssignment(key, tss.createNull());
-      }
-      typeReference = getTypeReferenceAsString(arrayType, typeChecker);
     }
 
     if (!type.isClass() && node.type && tss.isClassOrTypeElement(node.type)) {
       return undefined;
+    }
+
+    let typeReference = getTypeReferenceAsString(type, typeChecker);
+
+    if (isArrayType(type)) {
+      const arrayType = (type as any).typeArguments[0];
+      if (this.shouldCreateNullNode(arrayType, typeChecker, node)) {
+        return tss.createPropertyAssignment(key, tss.createNull());
+      }
+      typeReference = getTypeReferenceAsString(arrayType, typeChecker);
     }
 
     typeReference =
@@ -211,6 +204,18 @@ export class ModelVisitor {
     return tss.createPropertyAssignment(
       key,
       tss.createIdentifier(typeReference as string)
+    );
+  }
+
+  private static shouldCreateNullNode(
+    type: tss.Type,
+    typeChecker: tss.TypeChecker,
+    node: tss.PropertyDeclaration | tss.GetAccessorDeclaration
+  ): boolean {
+    return (
+      isPrimitiveType(type) ||
+      isTypeLiteral(type) ||
+      isAnyType(type, typeChecker, node)
     );
   }
 }
