@@ -5,6 +5,7 @@ import {
   hasPropertyKey,
   isAnyType,
   isArrayType,
+  isNullableUnionType,
   isPrimitiveType,
   isTypeLiteral,
 } from './ast-utils';
@@ -165,9 +166,13 @@ export class ModelVisitor {
       return undefined;
     }
 
-    const type = typeChecker.getTypeAtLocation(node);
+    let type = typeChecker.getTypeAtLocation(node);
     if (!type) {
       return undefined;
+    }
+
+    if (isNullableUnionType(type)) {
+      type = type.getNonNullableType();
     }
 
     if (

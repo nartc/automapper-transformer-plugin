@@ -24,6 +24,10 @@ export function isPrimitiveType(type: tss.Type): boolean {
   );
 }
 
+export function isNullableUnionType(type: tss.Type): boolean {
+  return type.isUnion() && (type as any)?.isNullableType();
+}
+
 export function isAnyType(
   type: tss.Type,
   typeChecker: tss.TypeChecker,
