@@ -79,6 +79,8 @@ This allows `@nartc/automapper` to look at these models and run the `static func
 
 `@nartc/automapper-transformer-plugin` will only add the minimum amount of code relating to the `@AutoMap()` decorator. If you want to have extra options (options from `class-transformer` library), you'd want to still decorate the fields manually.
 
+- **Union**: Currently, `@nartc/automapper-transformer-plugin` will handle most `Nullable` (`type | null`) and `Maybe` (`propKey?: type`) cases. However, for complex cases where you have unions with different types (`string | number | boolean` or `ClassA | ClassB`), please consider decorate the property (field) manually with `@AutoMap()` decorator.
+
 ### Installation
 
 ```shell script
