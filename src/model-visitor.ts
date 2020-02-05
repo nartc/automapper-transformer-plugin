@@ -3,6 +3,7 @@ import flatten from 'lodash.flatten';
 import tss from 'typescript/lib/tsserverlibrary';
 import {
   hasPropertyKey,
+  isAnyType,
   isArrayType,
   isPrimitiveType,
   isTypeLiteral,
@@ -169,7 +170,11 @@ export class ModelVisitor {
       return undefined;
     }
 
-    if (isPrimitiveType(type) || isTypeLiteral(type)) {
+    if (
+      isPrimitiveType(type) ||
+      isTypeLiteral(type) ||
+      isAnyType(type, typeChecker, node)
+    ) {
       return tss.createPropertyAssignment(key, tss.createNull());
     }
 

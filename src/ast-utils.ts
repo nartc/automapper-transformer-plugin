@@ -24,6 +24,18 @@ export function isPrimitiveType(type: tss.Type): boolean {
   );
 }
 
+export function isAnyType(
+  type: tss.Type,
+  typeChecker: tss.TypeChecker,
+  node: tss.PropertyDeclaration | tss.GetAccessorDeclaration
+): boolean {
+  return (
+    typeChecker.typeToString(type) === 'any' &&
+    !!node.type &&
+    node.type.kind === tss.SyntaxKind.AnyKeyword
+  );
+}
+
 export function isTypeLiteral(type: tss.Type): boolean {
   const symbol = type.getSymbol();
   if (!symbol) {
