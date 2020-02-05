@@ -178,17 +178,25 @@ export class ModelVisitor {
       return tss.createPropertyAssignment(key, tss.createNull());
     }
 
+    let typeReference = getTypeReferenceAsString(type, typeChecker);
+    if (isArrayType(type)) {
+      const arrayType = (type as any).typeArguments[0];
+      if (
+        isPrimitiveType(arrayType) ||
+        isTypeLiteral(arrayType) ||
+        isAnyType(arrayType, typeChecker, node)
+      ) {
+        return tss.createPropertyAssignment(key, tss.createNull());
+      }
+      typeReference = getTypeReferenceAsString(arrayType, typeChecker);
+    }
+
     if (!type.isClass() && node.type && tss.isClassOrTypeElement(node.type)) {
       return undefined;
     }
-    let typeReference = getTypeReferenceAsString(type, typeChecker);
+
     typeReference =
       typeReference === 'any' ? node.type?.getText() || '' : typeReference;
-
-    if (isArrayType(type)) {
-      const arrayType = (type as any).typeArguments[0];
-      typeReference = getTypeReferenceAsString(arrayType, typeChecker);
-    }
 
     if (!typeReference) {
       return undefined;
