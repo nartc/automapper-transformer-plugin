@@ -60,13 +60,13 @@ The plugin will look at files that end with `*.model.ts` and `*.vm.ts` and keep 
 ```javascript
 class Profile {
   static __NARTC_AUTOMAPPER_METADATA_FACTORY() {
-    return { bio: null, age: null };
+    return { bio: () => String, age: () => Number };
   }
 }
 
 class User {
   static __NARTC_AUTOMAPPER_METADATA_FACTORY() {
-    return { firstName: null, lastName: null, profile: Profile };
+    return { firstName: () => String, lastName: () => String, profile: () => Profile };
   }
 }
 ```
