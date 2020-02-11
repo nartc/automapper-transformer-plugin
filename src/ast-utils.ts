@@ -24,6 +24,30 @@ export function isPrimitiveType(type: tss.Type): boolean {
   );
 }
 
+export function hasFlag(type: tss.Type, flag: tss.TypeFlags) {
+  return (type.flags & flag) === flag;
+}
+
+export function isDate(type: tss.Type) {
+  return type.symbol && type.symbol.escapedName === 'Date';
+}
+
+export function isBoolean(type: tss.Type) {
+  return (
+    hasFlag(type, tss.TypeFlags.Boolean) ||
+    (type.isUnionOrIntersection() &&
+      type.types[0].flags === tss.TypeFlags.BooleanLiteral)
+  );
+}
+
+export function isString(type: tss.Type) {
+  return hasFlag(type, tss.TypeFlags.String);
+}
+
+export function isNumber(type: tss.Type) {
+  return hasFlag(type, tss.TypeFlags.Number);
+}
+
 export function isNullableUnionType(type: tss.Type): boolean {
   return type.isUnion() && (type as any)?.isNullableType();
 }

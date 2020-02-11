@@ -1,6 +1,14 @@
 import { dirname, posix } from 'path';
 import tss from 'typescript/lib/tsserverlibrary';
-import { getDecoratorName, getText } from './ast-utils';
+import {
+  getDecoratorName,
+  getText,
+  isArrayType,
+  isBoolean,
+  isDate,
+  isNumber,
+  isString,
+} from './ast-utils';
 
 export function isFilenameMatched(patterns: string[], filename: string) {
   return patterns.some(path => filename.includes(path));
@@ -16,12 +24,38 @@ export function getDecoratorOrUndefinedByNames(
 }
 
 export function getTypeReferenceAsString(
-  type: ts.Type,
-  typeChecker: ts.TypeChecker
+  type: tss.Type,
+  typeChecker: tss.TypeChecker
 ): string | undefined {
+  if (isArrayType(type)) {
+    const arrayType = (type as any).typeArguments[0];
+    const elementType = getTypeReferenceAsString(arrayType, typeChecker);
+    if (!elementType) {
+      return undefined;
+    }
+    return `[${elementType}]`;
+  }
+
+  if (isBoolean(type)) {
+    return Boolean.name;
+  }
+
+  if (isNumber(type)) {
+    return Number.name;
+  }
+
+  if (isString(type)) {
+    return String.name;
+  }
+
+  if (isDate(type)) {
+    return Date.name;
+  }
+
   if (type.isClass()) {
     return getText(type, typeChecker);
   }
+
   return undefined;
 }
 

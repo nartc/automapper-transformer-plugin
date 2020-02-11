@@ -56,17 +56,17 @@ export const userModelTranspiledText = `"use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 class Address {
     static __NARTC_AUTOMAPPER_METADATA_FACTORY() {
-        return { street: null };
+        return { street: () => String };
     }
 }
 class Profile {
     static __NARTC_AUTOMAPPER_METADATA_FACTORY() {
-        return { bio: null, age: null };
+        return { bio: () => String, age: () => String };
     }
 }
 class User {
     static __NARTC_AUTOMAPPER_METADATA_FACTORY() {
-        return { firstName: null, lastName: null, profile: Profile, addresses: Address, otherAddresses: Address, flag: null, foo: null, nullable: null, primitives: null, nullableType: Address, maybePrimitives: null, nullablePrimitives: null, maybeType: Address };
+        return { firstName: () => String, lastName: () => String, profile: () => Profile, addresses: () => [Address], otherAddresses: () => [Address], flag: () => Boolean, foo: null, nullable: () => String, primitives: () => [String], nullableType: () => Address, maybePrimitives: () => [String], nullablePrimitives: () => [String], maybeType: () => Address };
     }
 }
 exports.User = User;

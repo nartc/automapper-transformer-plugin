@@ -4,9 +4,7 @@ import tss from 'typescript/lib/tsserverlibrary';
 import {
   hasPropertyKey,
   isAnyType,
-  isArrayType,
   isNullableUnionType,
-  isPrimitiveType,
   isTypeLiteral,
 } from './ast-utils';
 import { AUTOMAPPER_DECORATOR, AUTOMAPPER_METADATA_FACTORY } from './constants';
@@ -179,22 +177,22 @@ export class ModelVisitor {
       return tss.createPropertyAssignment(key, tss.createNull());
     }
 
-    if (!type.isClass() && node.type && tss.isClassOrTypeElement(node.type)) {
-      return undefined;
-    }
+    // if (!type.isClass() && node.type && tss.isClassOrTypeElement(node.type)) {
+    //   return undefined;
+    // }
 
     let typeReference = getTypeReferenceAsString(type, typeChecker);
 
-    if (isArrayType(type)) {
-      const arrayType = (type as any).typeArguments[0];
-      if (this.shouldCreateNullNode(arrayType, typeChecker, node)) {
-        return tss.createPropertyAssignment(key, tss.createNull());
-      }
-      typeReference = getTypeReferenceAsString(arrayType, typeChecker);
-    }
-
-    typeReference =
-      typeReference === 'any' ? node.type?.getText() || '' : typeReference;
+    // if (isArrayType(type)) {
+    //   const arrayType = (type as any).typeArguments[0];
+    //   if (this.shouldCreateNullNode(arrayType, typeChecker, node)) {
+    //     return tss.createPropertyAssignment(key, tss.createNull());
+    //   }
+    //   typeReference = getTypeReferenceAsString(arrayType, typeChecker);
+    // }
+    //
+    // typeReference =
+    //   typeReference === 'any' ? node.type?.getText() || '' : typeReference;
 
     if (!typeReference) {
       return undefined;
@@ -203,7 +201,14 @@ export class ModelVisitor {
     typeReference = replaceImportPath(typeReference, hostFileName);
     return tss.createPropertyAssignment(
       key,
-      tss.createIdentifier(typeReference as string)
+      tss.createArrowFunction(
+        undefined,
+        undefined,
+        [],
+        undefined,
+        undefined,
+        tss.createIdentifier(typeReference as string)
+      )
     );
   }
 
@@ -212,10 +217,6 @@ export class ModelVisitor {
     typeChecker: tss.TypeChecker,
     node: tss.PropertyDeclaration | tss.GetAccessorDeclaration
   ): boolean {
-    return (
-      isPrimitiveType(type) ||
-      isTypeLiteral(type) ||
-      isAnyType(type, typeChecker, node)
-    );
+    return isTypeLiteral(type) || isAnyType(type, typeChecker, node);
   }
 }
