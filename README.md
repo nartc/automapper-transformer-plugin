@@ -2,12 +2,12 @@
 
 This plugin is to support [@nartc/automapper](https://github.com/nartc/mapper) in order to enhance DX by reducing boilerplate code.
 
-
 ![travis](https://badgen.net/travis/nartc/automapper-transformer-plugin)
 ![bundlephobia](https://badgen.net/bundlephobia/minzip/@nartc/automapper-transformer-plugin)
 ![downloads](https://badgen.net/npm/dt/@nartc/automapper-transformer-plugin)
 ![npm](https://badgen.net/npm/v/@nartc/automapper-transformer-plugin)
 ![license](https://badgen.net/github/license/nartc/automapper-transformer-plugin)
+[![Known Vulnerabilities](https://snyk.io/test/github/nartc/automapper-transformer-plugin/badge.svg?targetFile=package.json)](https://snyk.io/test/github/nartc/automapper-transformer-plugin?targetFile=package.json)
 
 ### How it works
 
