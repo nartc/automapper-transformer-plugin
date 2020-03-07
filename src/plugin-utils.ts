@@ -63,7 +63,7 @@ export function replaceImportPath(typeReference: string, fileName: string) {
   if (!typeReference.includes('import')) {
     return typeReference;
   }
-  let importPath = /\(\"([^)]).+(\")/.exec(typeReference)?.[0];
+  let importPath = /\("([^)]).+(")/.exec(typeReference)?.[0];
   if (!importPath) {
     return undefined;
   }
