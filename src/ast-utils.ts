@@ -115,7 +115,7 @@ function getNameFromExpression(
     expression &&
     expression.kind === tss.SyntaxKind.PropertyAccessExpression
   ) {
-    return (expression as tss.PropertyAccessExpression).name;
+    return (expression as tss.PropertyAccessExpression).name as any;
   }
   return expression;
 }
