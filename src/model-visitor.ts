@@ -45,7 +45,7 @@ export class ModelVisitor {
           }
 
           const isPropertyStaticOrPrivate = (node.modifiers || []).some(
-            modifier =>
+            (modifier) =>
               modifier.kind === tss.SyntaxKind.StaticKeyword ||
               modifier.kind === tss.SyntaxKind.PrivateKeyword
           );

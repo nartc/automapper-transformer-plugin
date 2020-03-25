@@ -5,8 +5,8 @@ export function hasPropertyKey(
   properties: ts.NodeArray<tss.PropertyAssignment>
 ): boolean {
   return properties
-    .filter(item => !isDynamicallyAdded(item))
-    .some(item => item.name.getText() === key);
+    .filter((item) => !isDynamicallyAdded(item))
+    .some((item) => item.name.getText() === key);
 }
 
 export function isDynamicallyAdded(identifier: tss.Node) {

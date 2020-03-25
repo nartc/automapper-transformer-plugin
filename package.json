@@ -21,7 +21,7 @@
     "start": "tsdx watch",
     "build": "tsdx build",
     "test": "CI=true tsdx test --no-cache",
-    "lint": "tsdx lint src && lint-staged",
+    "lint": "lint-staged && tsdx lint src",
     "commit": "git-cz",
     "semantic-release": "semantic-release",
     "run:example": "cd examples && ttsc"
@@ -29,7 +29,7 @@
   "peerDependencies": {},
   "husky": {
     "hooks": {
-      "pre-commit": "npm run test && git add . && npm run lint"
+      "pre-commit": "npm run test && npm run lint"
     }
   },
   "commitlint": {
@@ -43,8 +43,8 @@
     }
   },
   "lint-staged": {
-    "{src}/**/*.ts": [
-      "prettier --write"
+    "src/**/*.ts": [
+      "prettier --fix --write"
     ]
   },
   "publishConfig": {
@@ -90,10 +90,10 @@
     "cz-conventional-changelog": "3.1.0",
     "eslint-plugin-prettier": "3.1.2",
     "husky": "4.2.3",
-    "lint-staged": "10.0.8",
-    "prettier": "1.19.1",
+    "lint-staged": "10.0.9",
+    "prettier": "2.0.2",
     "semantic-release": "17.0.4",
-    "tsdx": "0.12.3",
+    "tsdx": "0.13.0",
     "tslib": "1.11.1",
     "ttypescript": "1.5.10",
     "typescript": "3.8.3"
