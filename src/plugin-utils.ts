@@ -33,7 +33,15 @@ export function getTypeReferenceAsString(
     if (!elementType) {
       return undefined;
     }
-    return `[${elementType}]`;
+    if (
+      elementType === Boolean.name ||
+      elementType === Number.name ||
+      elementType === String.name ||
+      elementType === Date.name
+    ) {
+      return `[${elementType}]`;
+    }
+    return elementType;
   }
 
   if (isBoolean(type)) {

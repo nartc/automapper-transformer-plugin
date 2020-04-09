@@ -66,7 +66,7 @@ class Profile {
 }
 class User {
     static __NARTC_AUTOMAPPER_METADATA_FACTORY() {
-        return { firstName: () => String, lastName: () => String, profile: () => Profile, addresses: () => [Address], otherAddresses: () => [Address], flag: () => Boolean, foo: null, nullable: () => String, primitives: () => [String], nullableType: () => Address, maybePrimitives: () => [String], nullablePrimitives: () => [String], maybeType: () => Address };
+        return { firstName: () => String, lastName: () => String, profile: () => Profile, addresses: () => Address, otherAddresses: () => Address, flag: () => Boolean, foo: null, nullable: () => String, primitives: () => [String], nullableType: () => Address, maybePrimitives: () => [String], nullablePrimitives: () => [String], maybeType: () => Address };
     }
 }
 exports.User = User;
