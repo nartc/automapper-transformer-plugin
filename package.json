@@ -92,7 +92,7 @@
     "husky": "4.2.5",
     "lint-staged": "10.1.2",
     "prettier": "2.0.4",
-    "semantic-release": "17.0.4",
+    "semantic-release": "17.0.6",
     "tsdx": "0.13.1",
     "tslib": "1.11.1",
     "ttypescript": "1.5.10",
