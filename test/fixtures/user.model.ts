@@ -54,6 +54,7 @@ export class User {
 
 export const userModelTranspiledText = `"use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.User = void 0;
 class Address {
     static __NARTC_AUTOMAPPER_METADATA_FACTORY() {
         return { street: () => String };
