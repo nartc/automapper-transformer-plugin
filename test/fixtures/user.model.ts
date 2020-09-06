@@ -1,4 +1,9 @@
 export const userModelText = `
+enum Role {
+  ADMIN,
+  USER
+}
+
 class Address {
   street: string;
 }
@@ -6,6 +11,11 @@ class Address {
 class Profile {
   bio: string;
   age: string;
+  role: Role;
+  roles: Role[];
+  maybeRole?: Role;
+  maybeRoles?: Role[];
+  nullableRole: Role | null;
 }
 
 export class User {
@@ -26,6 +36,11 @@ export class User {
 `;
 
 export const userModelTextStrict = `
+enum Role {
+  ADMIN,
+  USER
+}
+
 class Address {
   street!: string;
 }
@@ -33,6 +48,11 @@ class Address {
 class Profile {
   bio!: string;
   age!: string;
+  role!: Role;
+  roles!: Role[];
+  maybeRole?: Role;
+  maybeRoles?: Role[];
+  nullableRole!: Role | null;
 }
 
 export class User {
@@ -55,6 +75,11 @@ export class User {
 export const userModelTranspiledText = `"use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.User = void 0;
+var Role;
+(function (Role) {
+    Role[Role["ADMIN"] = 0] = "ADMIN";
+    Role[Role["USER"] = 1] = "USER";
+})(Role || (Role = {}));
 class Address {
     static __NARTC_AUTOMAPPER_METADATA_FACTORY() {
         return { street: () => String };
@@ -62,7 +87,7 @@ class Address {
 }
 class Profile {
     static __NARTC_AUTOMAPPER_METADATA_FACTORY() {
-        return { bio: () => String, age: () => String };
+        return { bio: () => String, age: () => String, role: () => Number, roles: () => [Number], maybeRole: () => Number, maybeRoles: () => [Number], nullableRole: () => Number };
     }
 }
 class User {

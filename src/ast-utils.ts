@@ -13,14 +13,47 @@ export function isDynamicallyAdded(identifier: tss.Node) {
   return identifier && !identifier.parent && identifier.pos === -1;
 }
 
-export function isPrimitiveType(type: tss.Type): boolean {
+export function isEnumType(type: tss.Type) {
+  if (hasFlag(type, tss.TypeFlags.Enum)) {
+    return true;
+  }
+
+  if (hasFlag(type, tss.TypeFlags.EnumLiteral) && !type.isUnion()) return false;
+
+  const symbol = type.getSymbol();
+  if (symbol == null) {
+    return false;
+  }
+  const { valueDeclaration } = symbol;
   return (
-    type.flags === tss.TypeFlags.String ||
-    type.flags === tss.TypeFlags.Number ||
-    type.flags === tss.TypeFlags.Boolean ||
-    (type.symbol && type.symbol.escapedName === 'Date') ||
-    (type.isUnionOrIntersection() &&
-      type.types[0].flags === tss.TypeFlags.BooleanLiteral)
+    valueDeclaration != null &&
+    valueDeclaration.kind === tss.SyntaxKind.EnumDeclaration
+  );
+}
+
+export function isStringEnum(type: tss.Type) {
+  const isEnum = isEnumType(type);
+  const valueDeclaration = type.getSymbol()
+    ?.valueDeclaration as tss.EnumDeclaration;
+
+  return (
+    isEnum &&
+    valueDeclaration?.members?.some(
+      (member: tss.EnumMember) => member.initializer != null
+    )
+  );
+}
+
+export function isNumberEnum(type: tss.Type) {
+  const isEnum = isEnumType(type);
+  const valueDeclaration = type.getSymbol()
+    ?.valueDeclaration as tss.EnumDeclaration;
+
+  return (
+    isEnum &&
+    valueDeclaration?.members?.some(
+      (member: tss.EnumMember) => member.initializer == null
+    )
   );
 }
 

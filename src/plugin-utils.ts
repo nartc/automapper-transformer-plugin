@@ -7,7 +7,9 @@ import {
   isBoolean,
   isDate,
   isNumber,
+  isNumberEnum,
   isString,
+  isStringEnum,
 } from './ast-utils';
 
 export function isFilenameMatched(patterns: string[], filename: string) {
@@ -48,11 +50,11 @@ export function getTypeReferenceAsString(
     return Boolean.name;
   }
 
-  if (isNumber(type)) {
+  if (isNumber(type) || isNumberEnum(type)) {
     return Number.name;
   }
 
-  if (isString(type)) {
+  if (isString(type) || isStringEnum(type)) {
     return String.name;
   }
 
