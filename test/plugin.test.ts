@@ -1,6 +1,10 @@
 import tss from 'typescript/lib/tsserverlibrary';
 import tsAutomapperPlugin from '../src';
 import {
+  inheritanceText,
+  inheritanceTranspiledText,
+} from './fixtures/inheritance.model';
+import {
   userModelText,
   userModelTextStrict,
   userModelTranspiledText,
@@ -48,5 +52,48 @@ describe('Plugin', () => {
     });
     expect(result.outputText).toBeTruthy();
     expect(result.outputText).toEqual(userModelTranspiledText);
+  });
+
+  it('compile inheritance', () => {
+    const tsConfig: tss.CompilerOptions = {
+      module: tss.ModuleKind.CommonJS,
+      target: tss.ScriptTarget.ESNext,
+      noEmitHelpers: true,
+    };
+
+    const fileName = 'inheritance.model.ts';
+    const programFixture = tss.createProgram([fileName], tsConfig);
+
+    const result = tss.transpileModule(inheritanceText, {
+      compilerOptions: tsConfig,
+      fileName,
+      transformers: {
+        before: [tsAutomapperPlugin(programFixture).before],
+      },
+    });
+    expect(result.outputText).toBeTruthy();
+    expect(result.outputText).toEqual(inheritanceTranspiledText);
+  });
+
+  it('compile inheritance strict', () => {
+    const tsConfig: tss.CompilerOptions = {
+      module: tss.ModuleKind.CommonJS,
+      target: tss.ScriptTarget.ESNext,
+      noEmitHelpers: true,
+      strict: true,
+    };
+
+    const fileName = 'inheritance.model.ts';
+    const programFixture = tss.createProgram([fileName], tsConfig);
+
+    const result = tss.transpileModule(inheritanceText, {
+      compilerOptions: tsConfig,
+      fileName,
+      transformers: {
+        before: [tsAutomapperPlugin(programFixture).before],
+      },
+    });
+    expect(result.outputText).toBeTruthy();
+    expect(result.outputText).toEqual(inheritanceTranspiledText);
   });
 });

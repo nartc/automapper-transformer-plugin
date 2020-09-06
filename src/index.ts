@@ -12,6 +12,7 @@ export default function tsAutomapperPlugin(
   const options = mergePluginOptions(opts);
   return {
     before(ctx: tss.TransformationContext) {
+      modelVisitor.reset();
       return (sf: tss.SourceFile) => {
         if (isFilenameMatched(options.modelFileNameSuffix || [], sf.fileName)) {
           return modelVisitor.visit(sf, ctx, program);

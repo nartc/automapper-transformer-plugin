@@ -17,6 +17,10 @@ import {
 export class ModelVisitor {
   private readonly metadataMap = new Map<string, any>();
 
+  reset() {
+    this.metadataMap.clear();
+  }
+
   visit(
     sourceFile: tss.SourceFile,
     context: tss.TransformationContext,
