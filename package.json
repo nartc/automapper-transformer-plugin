@@ -93,7 +93,7 @@
     "lint-staged": "10.3.0",
     "prettier": "2.1.2",
     "semantic-release": "17.1.2",
-    "tsdx": "0.14.0",
+    "tsdx": "0.14.1",
     "tslib": "2.0.1",
     "ttypescript": "1.5.12",
     "typescript": "3.9.7"
