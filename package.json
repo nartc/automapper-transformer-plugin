@@ -83,7 +83,7 @@
   "devDependencies": {
     "@commitlint/cli": "11.0.0",
     "@commitlint/config-conventional": "11.0.0",
-    "@types/jest": "26.0.15",
+    "@types/jest": "26.0.16",
     "@types/lodash.compact": "3.0.6",
     "@types/lodash.flatten": "4.4.6",
     "commitizen": "4.2.2",
