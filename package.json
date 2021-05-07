@@ -86,7 +86,7 @@
     "@types/jest": "26.0.23",
     "@types/lodash.compact": "3.0.6",
     "@types/lodash.flatten": "4.4.6",
-    "commitizen": "4.2.2",
+    "commitizen": "4.2.3",
     "cz-conventional-changelog": "3.3.0",
     "eslint-plugin-prettier": "3.4.0",
     "husky": "6.0.0",
