@@ -96,7 +96,7 @@
     "tsdx": "0.14.1",
     "tslib": "2.3.0",
     "ttypescript": "1.5.12",
-    "typescript": "3.9.7"
+    "typescript": "3.9.10"
   },
   "dependencies": {
     "lodash.compact": "3.0.1",
