@@ -94,7 +94,7 @@
     "prettier": "2.3.2",
     "semantic-release": "17.3.7",
     "tsdx": "0.14.1",
-    "tslib": "2.3.0",
+    "tslib": "2.3.1",
     "ttypescript": "1.5.12",
     "typescript": "3.9.7"
   },
