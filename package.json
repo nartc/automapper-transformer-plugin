@@ -81,8 +81,8 @@
     "trailingComma": "es5"
   },
   "devDependencies": {
-    "@commitlint/cli": "12.1.4",
-    "@commitlint/config-conventional": "12.1.4",
+    "@commitlint/cli": "19.2.1",
+    "@commitlint/config-conventional": "19.1.0",
     "@types/jest": "27.0.1",
     "@types/lodash.compact": "3.0.6",
     "@types/lodash.flatten": "4.4.6",
